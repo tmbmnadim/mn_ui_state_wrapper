@@ -6,7 +6,7 @@ class ObjectStateWrapper<T> extends StatelessWidget {
   final Widget Function(Widget child)? base;
   final Widget Function() onInitial;
   final Widget Function() onLoading;
-  final Widget Function(T data) onData;
+  final Widget Function(T data, bool isMoreLoading) onData;
   final Widget Function() onEmpty;
   final Widget Function(String message, StackTrace? stackTrace) onError;
 
@@ -26,7 +26,8 @@ class ObjectStateWrapper<T> extends StatelessWidget {
     final child = switch (state) {
       ViewStateInitial() => onInitial(),
       ViewStateLoading() => onLoading(),
-      ViewStateData(:final data) => onData(data),
+      ViewStateLoadingMore(:final data) => onData(data, true),
+      ViewStateData(:final data) => onData(data, false),
       ViewStateEmpty() => onEmpty(),
       ViewStateError(:final message, :final stackTrace) => onError(
         message,

@@ -13,6 +13,12 @@ class ViewStateLoading<T> extends ObjectViewState<T> {
   const ViewStateLoading() : super(message: null, stackTrace: null);
 }
 
+class ViewStateLoadingMore<T> extends ObjectViewState<T> {
+  @override
+  T get data => super.data!;
+  const ViewStateLoadingMore(T data) : super(data: data);
+}
+
 class ViewStateData<T> extends ObjectViewState<T> {
   @override
   T get data => super.data!;
